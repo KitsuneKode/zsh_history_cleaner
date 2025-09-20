@@ -336,6 +336,56 @@ class ZshHistoryCleaner:
 
         return normalized
 
+    # def process_history(self) -> bool:
+    #     """Process the history file and clean it."""
+    #     try:
+    #         self.log(f"Reading history file: {self.history_file}")
+    #
+    #         if not self.history_file.exists():
+    #             print(f"ERROR: History file does not exist: {self.history_file}")
+    #             return False
+    #
+    #         with open(self.history_file, "r", encoding="utf-8", errors="ignore") as f:
+    #             lines = f.readlines()
+    #
+    #         self.stats["total_lines"] = len(lines)
+    #         self.log(f"Total lines in history: {self.stats['total_lines']}")
+    #
+    #         # Process each line
+    #         current_entry = ""
+    #         for line_num, line in enumerate(lines, 1):
+    #             line = line.rstrip("\n\r")
+    #
+    #             # Check if this is a new history entry or continuation
+    #             if line.startswith(": ") and ":" in line and ";" in line:
+    #                 # Process previous entry if exists
+    #                 if current_entry:
+    #                     self._process_entry(current_entry)
+    #
+    #                 # Start new entry
+    #                 current_entry = line
+    #             else:
+    #                 # Continuation of previous entry
+    #                 if current_entry:
+    #                     current_entry += "\n" + line
+    #                 else:
+    #                     self.log(
+    #                         f"Warning: Orphaned line at {line_num}: {line[:50]}..."
+    #                     )
+    #                     self.stats["malformed_removed"] += 1
+    #
+    #         # Process the last entry
+    #         if current_entry:
+    #             self._process_entry(current_entry)
+    #
+    #         self.stats["final_entries"] = len(self.cleaned_entries)
+    #         return True
+    #
+    #     except Exception as e:
+    #         print(f"ERROR: Failed to process history: {e}")
+    #         return False
+    #
+
     def process_history(self) -> bool:
         """Process the history file and clean it."""
         try:
@@ -351,30 +401,32 @@ class ZshHistoryCleaner:
             self.stats["total_lines"] = len(lines)
             self.log(f"Total lines in history: {self.stats['total_lines']}")
 
-            # Process each line
-            current_entry = ""
-            for line_num, line in enumerate(lines, 1):
-                line = line.rstrip("\n\r")
+            timestamp_re = re.compile(r"^: \d+:\d+;")
 
-                # Check if this is a new history entry or continuation
-                if line.startswith(": ") and ":" in line and ";" in line:
-                    # Process previous entry if exists
+            current_entry = ""
+            for line_num, raw_line in enumerate(lines, 1):
+                line = raw_line.rstrip("\n\r")
+
+                # If this line starts a new history entry (valid timestamp)...
+                if timestamp_re.match(line):
+                    # process any pending entry
                     if current_entry:
                         self._process_entry(current_entry)
-
-                    # Start new entry
                     current_entry = line
-                else:
-                    # Continuation of previous entry
-                    if current_entry:
-                        current_entry += "\n" + line
-                    else:
-                        self.log(
-                            f"Warning: Orphaned line at {line_num}: {line[:50]}..."
-                        )
-                        self.stats["malformed_removed"] += 1
+                    continue
 
-            # Process the last entry
+                # If it's not a timestamp line:
+                if current_entry:
+                    # treat as continuation of the current entry
+                    current_entry += "\n" + line
+                else:
+                    # orphaned / malformed line outside any entry — drop it and count it
+                    self.stats["malformed_removed"] += 1
+                    self.log(
+                        f"Removed orphaned/malformed line at {line_num}: {line[:120]}..."
+                    )
+
+            # process the final entry if present
             if current_entry:
                 self._process_entry(current_entry)
 
@@ -386,15 +438,35 @@ class ZshHistoryCleaner:
             return False
 
     def _process_entry(self, entry: str) -> None:
-        """Process a single history entry."""
-        parsed = self.parse_history_entry(entry)
+        """Process a single history entry, removing malformed lines inside multi-line entries."""
+        lines = entry.splitlines()
+        valid_lines = []
 
+        for line in lines:
+            if re.match(r"^: \d+:\d+;", line):
+                valid_lines.append(line)
+            else:
+                self.stats["malformed_removed"] += 1
+                self.log(f"Removed malformed line: {line[:50]}...")
+
+        if not valid_lines:
+            # Nothing valid to process
+            return
+
+        # Use only the first valid line for timestamp parsing
+        parsed = self.parse_history_entry(valid_lines[0])
         if not parsed:
-            self.log(f"Malformed entry: {entry[:50]}...")
             self.stats["malformed_removed"] += 1
+            self.log(f"Malformed entry after filtering: {valid_lines[0][:50]}...")
             return
 
         timestamp_part, command = parsed
+
+        # Combine remaining lines as part of the command
+        if len(valid_lines) > 1:
+            # Append the rest of the lines to the command
+            command += "\n" + "\n".join(valid_lines[1:])
+
         self.stats["valid_entries"] += 1
 
         # Check allow rules first (higher priority - these should be deleted)
