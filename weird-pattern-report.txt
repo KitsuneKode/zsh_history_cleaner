@@ -1,0 +1,121 @@
+WEIRD PATTERN SCAN REPORT
+file: .zsh_history.backup_20260305_010814
+total_lines: 10727
+entries_detected: 10156
+
+[line-level counts]
+continuation_or_orphan_line: 388
+
+[command-level counts]
+ansi_escape_sequence: 4
+ends_with_backslash_continuation: 337
+raw_control_character: 8
+unclosed_backtick: 1
+unclosed_double_quote: 5
+unclosed_single_quote: 6
+multiline_entries: 265
+
+[samples]
+
+## continuation_or_orphan_line
+3288:  learn-go
+3294:  learn-go
+3659: yarn init -y
+3661: typescript\
+3662: yarn add -D tsx\
+3663: touch keygen.ts\
+3664: touch airdrop.ts\
+3665: touch transfer.ts\
+3666: touch enroll.ts
+3668: ES2022,DOM --module es2022 --moduleResolution bundler\
+3669: --resolveJsonModule true --strict true --target ES2022
+3671: ES2022,DOM --module es2022 --moduleResolution bundler\
+
+## ansi_escape_sequence
+11: <ESC>[200~pnpm dlx shadcn@latest add alert-dialog
+4872: <ESC>[200~cat /proc/driver/nvidia/params | grep PreserveVideoMemoryAllocations
+4873: ~<ESC>[200~cat /proc/driver/nvidia/params | grep PreserveVideoMemoryAllocations
+8328: <ESC>[200~prime-run emulator \\
+  -avd Medium_Phone \\
+  -gpu host \\
+  -no-vulkan \\
+  -enable-kvm
+
+## ends_with_backslash_continuation
+124: sudo rm -r /var/lib/pacman/sync\
+227: flatpak ps | grep vesktop\
+267: flatpak override --user --filesystem=xdg-run/app/com.discordapp.Discord:create com.discordapp.Discord\
+268: flatpak override --user --filesystem=xdg-run/app/dev.vencord.Vesktop:create dev.vencord.Vesktop\
+269: ls $XDG_RUNTIME_DIR | grep discord-ipc\
+308: gpg --full-generate-key\
+309: gpg --list-secret-keys --keyid-format=long\
+310: gpg --armor --export F150E88B50720270\
+323: sudo create_ap wlan0 eth0 MyHotspotName MyPassword\
+324: sudo create_ap wlan0 wlan0 MyHotspotName MyPassword\
+325: sudo pacman -S network-manager-applet dnsmasq\
+356: git config --global init.defaultBranch main\
+
+## raw_control_character
+11: <ESC>[200~pnpm dlx shadcn@latest add alert-dialog
+1721: 
+4872: <ESC>[200~cat /proc/driver/nvidia/params | grep PreserveVideoMemoryAllocations
+4873: ~<ESC>[200~cat /proc/driver/nvidia/params | grep PreserveVideoMemoryAllocations
+8328: <ESC>[200~prime-run emulator \\
+  -avd Medium_Phone \\
+  -gpu host \\
+  -no-vulkan \\
+  -enable-kvm
+9320: sudo pacman -S nvidia-utils lib32-nvidia-utils \<ESC>E                 mesa vulkan-icd-loader lib32-vulkan-icd-loader \<ESC>E                 vulkan-tools vulkan-intel
+10213: pkill -f metro<ESC>Epkill -f "expo start"
+10581: 
+
+## unclosed_backtick
+8429: sudo auto-cpufreq --monitor`
+
+## unclosed_double_quote
+46: gc -S -m "add 40404""
+233: ln -sf "$XDG_RUNTIME_DIR/{
+4437: export FZF_CTRL_R_OPTS="\
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'\
+  --color header:italic
+7138: z "ws-rust'
+7417: ls -a | grep "package"\
+"
+
+## unclosed_single_quote
+406: nvim .hyde.zshrc'
+3806: bun dev'
+4370: \
+  fzf --preview='\
+    if file --mime-type {} | grep -qF 'image/'; then\
+      # --transfer-mode=memory is the fastest option but if you want fzf to be able\
+      # to redraw the image on terminal resize or on 'change
+4381: fzf --preview='\
+    if file --mime-type {} | grep -qF 'image/'; then\
+      # --transfer-mode=memory is the fastest option but if you want fzf to be able\
+      # to redraw the image on terminal resize or on 'change-pre
+5953: git checkout -b Module not found: Can't resolve 'geist/font/mono'\
+  1 | import '@lovico/ui/globals.css'\
+7114: curl -X POST localhost:8080/api/v1/signup --data '{ "username
+
+## multiline_entries
+3287: git rm --cached learn-go\\n learn-go
+3293: git submodule add git@github.com:KitsuneKode/learn-go.git\\n learn-go
+3540: bun pm ls typescript\\n
+3595: zen --ozone-platform=wayland --enable-features=UseSkiaRenderer\\n
+3597: watch -n 0.5 hyprctl monitors\\n
+3658: mkdir airdrop && cd airdrop\\nyarn init -y
+3660: yarn add @solana/kit @solana-program/system @types/node bs58 ws\\ntypescript\\nyarn add -D tsx\\ntouch keygen.ts\\ntouch airdrop.ts\\ntouch transfer.ts\\ntouch enroll.ts
+3667: yarn tsx --init --rootDir ./ --outDir ./dist --esModuleInterop --lib\\nES2022,DOM --module es2022 --moduleResolution bundler\\n--resolveJsonModule true --strict true --target ES2022
+3670: yarn tsc --init --rootDir ./ --outDir ./dist --esModuleInterop --lib\\nES2022,DOM --module es2022 --moduleResolution bundler\\n--resolveJsonModule true --strict true --target ES2022
+3685: mkdir programs\\nmkdir scripts\\nmkdir clients\\ntouch ./programs/Turbin3_prereq.json\\ntouch ./scripts/generate-client.ts
+3907: cd mongo/'\\n'
+4059: echo "import { defineConfig } from 'vite'\nimport react from '@vitejs/plugin-react'\n\nexport default defineConfig({\n  plugins: [react()],\n  server: {\n    host: \"0.0.0.0\" , allowedHosts: [\".e2b.app\"]}\n})" \\n
+4109: cd /home/kitsunekode/Projects/learning-history-dump/redis/redis-streams\\n
+4210: git commit -m "improve ux and node-execution logic\\n"
+4220: pacman -Slq | fzf --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S\\n
+4253: fzf --reverse --preview="bat ueberzugpp cmd -s $SOCKET -i fzfpreview -a add -x $X -y 1 --max-width $max_width --max-height $max_height -f {}"\\n
+4255: \\ncase "$(uname -a)" in\\n    *Darwin*) UEBERZUG_TMP_DIR="$TMPDIR" ;;\\n    *) UEBERZUG_TMP_DIR="/tmp" ;;\\nesac\\n\\ncleanup() {\\n    ueberzugpp cmd -s "$SOCKET" -a exit\\n}\\ntrap cleanup HUP INT QUIT TERM EXIT\\n\\nUB_PID_FILE="$UEBERZUG_TMP_DIR/.$(uuidge
+4279: /usr/share/grub/themes/starfield\\n
+4360: fzf --reverse --preview="ueberzugpp cmd -s $SOCKET -i fzfpreview -a add \\\n                            -x \$FZF_PREVIEW_LEFT -y \$FZF_PREVIEW_TOP \\\n                            --max-width \$FZF_PREVIEW_COLUMNS --max-height \$FZF_PREVIEW_LINES \\\n          
+4364: command -v bat || echo "bat missing   install or script will use sed/cat fallback"\\ncommand -v ueberzugpp || echo "ueberzugpp missing   image preview won't work"\\n

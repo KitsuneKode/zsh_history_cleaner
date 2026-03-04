@@ -1,0 +1,66 @@
+{
+  "description": "Default hzclean configuration",
+  "defaults": {
+    "max_length": 500,
+    "backup_retention": 10,
+    "verbose": false
+  },
+  "ignore_list": [
+    {
+      "pattern": "git commit",
+      "match_type": "starts_with",
+      "case_sensitive": false,
+      "description": "Keep git commits"
+    },
+    {
+      "pattern": "vim",
+      "match_type": "starts_with",
+      "case_sensitive": false,
+      "description": "Keep editor usage"
+    },
+    {
+      "pattern": "cd ",
+      "match_type": "starts_with",
+      "case_sensitive": false,
+      "description": "Keep directory navigation"
+    },
+    {
+      "pattern": "npm|yarn|pnpm|bun",
+      "match_type": "regex",
+      "case_sensitive": false,
+      "description": "Keep package manager commands"
+    }
+  ],
+  "allow_list": [
+    {
+      "pattern": "error: failed to commit transaction",
+      "match_type": "contains",
+      "case_sensitive": false,
+      "description": "Drop pacman transaction errors"
+    },
+    {
+      "pattern": "checking.*keyring.*100%",
+      "match_type": "regex",
+      "case_sensitive": false,
+      "description": "Drop pacman progress output"
+    },
+    {
+      "pattern": "exists in filesystem",
+      "match_type": "contains",
+      "case_sensitive": false,
+      "description": "Drop filesystem conflict output"
+    },
+    {
+      "pattern": "^\\s*$",
+      "match_type": "regex",
+      "case_sensitive": false,
+      "description": "Drop empty commands"
+    },
+    {
+      "pattern": "^clear$|^cls$|^ls$|^ll$|^la$",
+      "match_type": "regex",
+      "case_sensitive": false,
+      "description": "Drop noisy short commands"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+: 1746520700:0;echo 'broken
+;1746520770:0;sudo create_ap --freq-band 5 --mkconfig /etc/create_ap.conf wlan0 enp0s20f0u3
+:1746520865:0;iw list
+: 1746520895:0;iw list | grep Band
+: 1746521065:0;sudo iw reg set US

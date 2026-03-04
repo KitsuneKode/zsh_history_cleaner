@@ -1,0 +1,17 @@
+{
+  "name": "@kitsunekode/hzclean",
+  "version": "1.0.0",
+  "description": "Fast and safe zsh history cleaner built with Bun + TypeScript",
+  "type": "module",
+  "bin": {
+    "hzclean": "./src/cli.ts"
+  },
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "test": "bun test",
+    "help": "bun run src/cli.ts --help"
+  },
+  "engines": {
+    "bun": ">=1.3.0"
+  }
+}

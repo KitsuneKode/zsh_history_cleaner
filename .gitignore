@@ -1,3 +1,7 @@
 topics.txt
 zsh-history-cleaner-v1.py
 .default-config.json
+node_modules/
+bun.lock
+*.backup_*
+coverage/

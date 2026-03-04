@@ -1,0 +1,6 @@
+: 1741506938:0;prime-run google-chrome-stable --use-gl=desktop --enable-features=UseOzonePlatform --ozone-platform=wayland\
+: 1741507047:0;prime-run google-chrome-stable --use-gl=desktop --enable-features=UseOzonePlatform --ozone-platform=wayland  --enable-features=VaapiVideoDecodeLinuxGL\
+: 1741507320:0;prime-run google-chrome-stable --use-gl=desktop --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=AcceleratedVideoDecodeLinuxGL
+: 1741507446:0;chro,e --gpu-testing-vendor-id=0x8086 --gpu-testing-device-id=0x1912\
+: 1741507457:0;chrome --gpu-testing-vendor-id=0x8086 --gpu-testing-device-id=0x1912\
+: 1741508116:0;prime-run google-chrome-stable --enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder --ignore-gpu-blocklist\
